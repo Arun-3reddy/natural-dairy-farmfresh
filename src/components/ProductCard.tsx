@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, ShoppingCart, Star } from "lucide-react";
+import { useApp } from "@/contexts/AppContext";
 
 interface Product {
   id: string;
@@ -21,12 +22,31 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const { cart, wishlist, toast } = useApp();
+  
   const discount = product.originalPrice 
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0;
 
+  const handleAddToCart = () => {
+    cart.addToCart(product);
+    toast.toast({
+      title: "Added to cart!",
+      description: `${product.name} has been added to your cart.`,
+    });
+  };
+
+  const handleToggleWishlist = () => {
+    wishlist.toggleWishlist(product);
+    const isInWishlist = wishlist.isInWishlist(product.id);
+    toast.toast({
+      title: isInWishlist ? "Added to wishlist!" : "Removed from wishlist!",
+      description: `${product.name} has been ${isInWishlist ? 'added to' : 'removed from'} your wishlist.`,
+    });
+  };
+
   return (
-    <Card className="group hover:shadow-elegant transition-all duration-300 border-border/40 hover:border-primary/20 bg-gradient-card">
+    <Card className="group hover:shadow-elegant transition-all duration-300 border-border/40 hover:border-primary/20 bg-gradient-card hover-scale animate-fade-in">
       <CardContent className="p-0">
         {/* Image Container */}
         <div className="relative overflow-hidden rounded-t-lg">
@@ -55,9 +75,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
             variant="secondary" 
             size="icon" 
             className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-background/80 backdrop-blur-sm hover:bg-background"
-            onClick={() => console.log('Wishlist clicked for', product.name)}
+            onClick={handleToggleWishlist}
           >
-            <Heart className="h-4 w-4" />
+            <Heart className={`h-4 w-4 ${wishlist.isInWishlist(product.id) ? 'text-red-500 fill-current' : ''}`} />
           </Button>
 
           {/* Stock Status */}
@@ -117,9 +137,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <div className="flex gap-2 pt-2">
             <Button 
               variant="cart" 
-              className="flex-1" 
+              className="flex-1 hover-scale" 
               disabled={!product.inStock}
-              onClick={() => console.log('Add to Cart clicked for', product.name)}
+              onClick={handleAddToCart}
             >
               <ShoppingCart className="h-4 w-4 mr-2" />
               Add to Cart
