@@ -55,6 +55,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             variant="secondary" 
             size="icon" 
             className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-background/80 backdrop-blur-sm hover:bg-background"
+            onClick={() => console.log('Wishlist clicked for', product.name)}
           >
             <Heart className="h-4 w-4" />
           </Button>
@@ -118,6 +119,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               variant="cart" 
               className="flex-1" 
               disabled={!product.inStock}
+              onClick={() => console.log('Add to Cart clicked for', product.name)}
             >
               <ShoppingCart className="h-4 w-4 mr-2" />
               Add to Cart

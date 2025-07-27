@@ -35,11 +35,11 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" variant="default" className="group">
+              <Button size="lg" variant="default" className="group" onClick={() => console.log('Shop Now clicked')}>
                 Shop Now
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button size="lg" variant="hero">
+              <Button size="lg" variant="hero" onClick={() => console.log('Learn More clicked')}>
                 Learn More
               </Button>
             </div>
@@ -76,7 +76,7 @@ const Hero = () => {
                   <p className="text-2xl font-bold text-primary">₹50</p>
                   <p className="text-sm text-muted-foreground">per liter</p>
                 </div>
-                <Button variant="cart" className="w-full">
+                <Button variant="cart" className="w-full" onClick={() => console.log('Order Now clicked')}>
                   Order Now
                 </Button>
               </div>

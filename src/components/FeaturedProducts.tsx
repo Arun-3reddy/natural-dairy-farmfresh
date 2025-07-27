@@ -75,7 +75,7 @@ const FeaturedProducts = () => {
 
         {/* View All Button */}
         <div className="text-center">
-          <Button variant="outline" size="lg" className="group">
+          <Button variant="outline" size="lg" className="group" onClick={() => console.log('View All Products clicked')}>
             View All Products
             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>

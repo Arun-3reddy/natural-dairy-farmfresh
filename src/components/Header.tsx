@@ -32,11 +32,11 @@ const Header = () => {
 
           {/* Navigation Icons */}
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="icon" className="relative">
+            <Button variant="ghost" size="icon" className="relative" onClick={() => console.log('Wishlist clicked')}>
               <Heart className="h-5 w-5" />
             </Button>
             
-            <Button variant="ghost" size="icon" className="relative">
+            <Button variant="ghost" size="icon" className="relative" onClick={() => console.log('Cart clicked')}>
               <ShoppingCart className="h-5 w-5" />
               <Badge 
                 variant="secondary" 
@@ -46,7 +46,7 @@ const Header = () => {
               </Badge>
             </Button>
             
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={() => console.log('Login clicked')}>
               <User className="h-4 w-4 mr-2" />
               Login
             </Button>
@@ -56,12 +56,12 @@ const Header = () => {
         {/* Navigation Menu */}
         <nav className="border-t border-border/40 py-3">
           <div className="flex items-center justify-center space-x-8">
-            <Button variant="ghost" className="text-sm">Home</Button>
-            <Button variant="ghost" className="text-sm">All Products</Button>
-            <Button variant="ghost" className="text-sm">Milk</Button>
-            <Button variant="ghost" className="text-sm">Dairy Products</Button>
-            <Button variant="ghost" className="text-sm">Organic</Button>
-            <Button variant="ghost" className="text-sm">Contact</Button>
+            <Button variant="ghost" className="text-sm" onClick={() => console.log('Home clicked')}>Home</Button>
+            <Button variant="ghost" className="text-sm" onClick={() => console.log('All Products clicked')}>All Products</Button>
+            <Button variant="ghost" className="text-sm" onClick={() => console.log('Milk clicked')}>Milk</Button>
+            <Button variant="ghost" className="text-sm" onClick={() => console.log('Dairy Products clicked')}>Dairy Products</Button>
+            <Button variant="ghost" className="text-sm" onClick={() => console.log('Organic clicked')}>Organic</Button>
+            <Button variant="ghost" className="text-sm" onClick={() => console.log('Contact clicked')}>Contact</Button>
           </div>
         </nav>
       </div>
