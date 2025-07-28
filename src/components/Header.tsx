@@ -9,17 +9,8 @@ const Header = () => {
   const { cart, wishlist } = useApp();
 
   const handleSearch = (query: string) => {
-    // Pass search query to parent component
-    if (window.searchProducts) {
-      window.searchProducts(query);
-    }
-  };
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    console.log('Searching for:', query);
+    // Add search logic here
   };
 
   return (
@@ -79,12 +70,12 @@ const Header = () => {
         {/* Navigation Menu */}
         <nav className="border-t border-border/40 py-3">
           <div className="flex items-center justify-center space-x-8">
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('hero')}>Home</Button>
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('products')}>All Products</Button>
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('products')}>Milk</Button>
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('products')}>Dairy Products</Button>
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('products')}>Organic</Button>
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('footer')}>Contact</Button>
+            <Button variant="ghost" className="text-sm story-link" onClick={() => console.log('Home clicked')}>Home</Button>
+            <Button variant="ghost" className="text-sm story-link" onClick={() => console.log('All Products clicked')}>All Products</Button>
+            <Button variant="ghost" className="text-sm story-link" onClick={() => console.log('Milk clicked')}>Milk</Button>
+            <Button variant="ghost" className="text-sm story-link" onClick={() => console.log('Dairy Products clicked')}>Dairy Products</Button>
+            <Button variant="ghost" className="text-sm story-link" onClick={() => console.log('Organic clicked')}>Organic</Button>
+            <Button variant="ghost" className="text-sm story-link" onClick={() => console.log('Contact clicked')}>Contact</Button>
           </div>
         </nav>
       </div>
