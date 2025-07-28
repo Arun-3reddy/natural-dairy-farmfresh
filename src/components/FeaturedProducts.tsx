@@ -51,9 +51,19 @@ const featuredProducts = [
   }
 ];
 
-const FeaturedProducts = () => {
+interface FeaturedProductsProps {
+  searchQuery?: string;
+}
+
+const FeaturedProducts = ({ searchQuery = "" }: FeaturedProductsProps) => {
+  // Filter products based on search query
+  const filteredProducts = featuredProducts.filter(product =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <section className="py-16 bg-secondary/30">
+    <section id="products" className="py-16 bg-secondary/30">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center space-y-4 mb-12">
@@ -68,9 +78,20 @@ const FeaturedProducts = () => {
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))
+          ) : searchQuery ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground text-lg">No products found matching "{searchQuery}"</p>
+              <p className="text-sm text-muted-foreground mt-2">Try searching for milk, ghee, paneer, or other dairy products</p>
+            </div>
+          ) : (
+            featuredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))
+          )}
         </div>
 
         {/* View All Button */}

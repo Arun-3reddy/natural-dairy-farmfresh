@@ -4,7 +4,7 @@ import heroDairyFarm from "@/assets/hero-dairy-farm.jpg";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[80vh] flex items-center bg-gradient-hero overflow-hidden">
+    <section id="hero" className="relative min-h-[80vh] flex items-center bg-gradient-hero overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
