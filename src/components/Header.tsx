@@ -83,7 +83,7 @@ const Header = () => {
             <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('products')}>All Products</Button>
             <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('products')}>Milk</Button>
             <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('products')}>Dairy Products</Button>
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('products')}>Organic</Button>
+            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('organic-milk')}>Organic</Button>
             <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('footer')}>Contact</Button>
           </div>
         </nav>

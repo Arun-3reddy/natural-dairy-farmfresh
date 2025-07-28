@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import FeaturedProducts from "@/components/FeaturedProducts";
+import OrganicMilkSection from "@/components/OrganicMilkSection";
+import CustomerSignupForm from "@/components/CustomerSignupForm";
+import ContactOwnerForm from "@/components/ContactOwnerForm";
 import Footer from "@/components/Footer";
 import { AppProvider } from "@/contexts/AppContext";
 import { Toaster } from "@/components/ui/toaster";
@@ -33,6 +36,9 @@ const Index = () => {
         <main>
           <Hero />
           <FeaturedProducts searchQuery={searchQuery} />
+          <OrganicMilkSection />
+          <CustomerSignupForm />
+          <ContactOwnerForm />
         </main>
         <Footer />
         <Toaster />
