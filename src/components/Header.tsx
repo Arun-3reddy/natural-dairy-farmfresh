@@ -1,12 +1,14 @@
-import { ShoppingCart, Heart, User } from "lucide-react";
+import { ShoppingCart, Heart, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useApp } from "@/contexts/AppContext";
+import { useAuth } from "@/contexts/AuthContext";
 import CartDrawer from "./CartDrawer";
 import SearchBar from "./SearchBar";
 
 const Header = () => {
   const { cart, wishlist } = useApp();
+  const { user, signOut } = useAuth();
 
   const handleSearch = (query: string) => {
     // Pass search query to parent component
@@ -69,10 +71,21 @@ const Header = () => {
               removeFromCart={cart.removeFromCart}
             />
             
-            <Button variant="outline" size="sm" className="hover-scale" onClick={() => console.log('Login clicked')}>
-              <User className="h-4 w-4 mr-2" />
-              Login
-            </Button>
+            {/* Auth buttons */}
+            {user ? (
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">Welcome, {user.user_metadata?.full_name || user.email}</span>
+                <Button variant="outline" size="sm" className="hover-scale" onClick={signOut}>
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <Button variant="outline" size="sm" className="hover-scale" onClick={() => window.location.href = '/auth'}>
+                <User className="h-4 w-4 mr-2" />
+                Sign In
+              </Button>
+            )}
           </div>
         </div>
 

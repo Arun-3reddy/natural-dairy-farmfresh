@@ -5,10 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { UserPlus, Mail, Phone, MapPin, User } from "lucide-react";
 
 const CustomerSignupForm = () => {
   const { toast } = useToast();
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,23 +29,42 @@ const CustomerSignupForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to update your profile.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // TODO: This requires Supabase integration for database storage
-      console.log('Customer signup data:', formData);
+      // Update user profile in Supabase
+      const { error } = await supabase
+        .from('profiles')
+        .upsert({
+          user_id: user.id,
+          full_name: formData.name,
+          phone: formData.phone,
+          address: formData.address
+        });
+
+      if (error) throw error;
       
       toast({
-        title: "Signup Successful!",
-        description: "Welcome to Natural Dairy! We'll contact you soon with exclusive offers.",
+        title: "Profile Updated!",
+        description: "Your profile information has been saved successfully.",
       });
       
       // Reset form
       setFormData({ name: "", email: "", phone: "", address: "" });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: "Error",
-        description: "Failed to submit signup. Please try again.",
+        description: error.message || "Failed to update profile. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -59,9 +81,14 @@ const CustomerSignupForm = () => {
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <UserPlus className="h-8 w-8 text-primary" />
               </div>
-              <CardTitle className="text-2xl">Join Natural Dairy Family</CardTitle>
+              <CardTitle className="text-2xl">
+                {user ? 'Update Your Profile' : 'Join Natural Dairy Family'}
+              </CardTitle>
               <CardDescription>
-                Sign up to get fresh organic milk delivered to your doorstep and enjoy exclusive offers
+                {user 
+                  ? 'Update your contact information and delivery details'
+                  : 'Please sign in first to join our community and get fresh milk delivered'
+                }
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -130,13 +157,23 @@ const CustomerSignupForm = () => {
                   />
                 </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full" 
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Joining..." : "Join Natural Dairy"}
-                </Button>
+                {user ? (
+                  <Button 
+                    type="submit" 
+                    className="w-full" 
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Updating..." : "Update Profile"}
+                  </Button>
+                ) : (
+                  <Button 
+                    type="button" 
+                    className="w-full" 
+                    onClick={() => window.location.href = '/auth'}
+                  >
+                    Sign In to Join
+                  </Button>
+                )}
               </form>
             </CardContent>
           </Card>
