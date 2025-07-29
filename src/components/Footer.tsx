@@ -65,14 +65,14 @@ const Footer = () => {
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-primary-glow mt-0.5" />
                 <div className="text-sm text-background/80">
-                  <p>Natural Dairy Farm</p>
-                  <p>Village Road, Rural District</p>
-                  <p>State, India - 123456</p>
+                  <p>Natural Dairy, Plot No. 42</p>
+                  <p>Gachibowli, Hyderabad</p>
+                  <p>Telangana, India - 500032</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-primary-glow" />
-                <span className="text-sm text-background/80">+91-90000-12345</span>
+                <span className="text-sm text-background/80">+91-9876543210</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-primary-glow" />

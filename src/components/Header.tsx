@@ -93,10 +93,8 @@ const Header = () => {
         <nav className="border-t border-border/40 py-3">
           <div className="flex items-center justify-center space-x-8">
             <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('hero')}>Home</Button>
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('products')}>All Products</Button>
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('products')}>Milk</Button>
             <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('products')}>Dairy Products</Button>
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('organic-milk')}>Organic</Button>
+            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('organic-milk')}>About Us</Button>
             <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('footer')}>Contact</Button>
           </div>
         </nav>

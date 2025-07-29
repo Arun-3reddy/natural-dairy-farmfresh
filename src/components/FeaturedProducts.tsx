@@ -48,6 +48,29 @@ const featuredProducts = [
     reviews: 73,
     inStock: true,
     badge: "Organic"
+  },
+  {
+    id: "5",
+    name: "Buffalo Ghee",
+    price: 450,
+    originalPrice: 500,
+    image: "https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?w=400&h=300&fit=crop&crop=center",
+    category: "Dairy Products",
+    rating: 4.9,
+    reviews: 67,
+    inStock: true,
+    badge: "Premium"
+  },
+  {
+    id: "6",
+    name: "Curd",
+    price: 40,
+    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=300&fit=crop&crop=center",
+    category: "Dairy Products",
+    rating: 4.7,
+    reviews: 112,
+    inStock: true,
+    badge: "Fresh"
   }
 ];
 
