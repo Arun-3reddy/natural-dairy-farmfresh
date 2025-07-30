@@ -14,19 +14,40 @@ export type Database = {
   }
   public: {
     Tables: {
-      "customer data": {
+      contact_messages: {
         Row: {
           created_at: string
-          id: number
+          email: string
+          id: string
+          message: string
+          name: string
+          status: string | null
+          subject: string
         }
         Insert: {
           created_at?: string
-          id?: number
+          email: string
+          id?: string
+          message: string
+          name: string
+          status?: string | null
+          subject: string
         }
         Update: {
           created_at?: string
-          id?: number
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          status?: string | null
+          subject?: string
         }
+        Relationships: []
+      }
+      "customer data": {
+        Row: {}
+        Insert: {}
+        Update: {}
         Relationships: []
       }
       profiles: {

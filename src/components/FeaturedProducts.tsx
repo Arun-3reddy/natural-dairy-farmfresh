@@ -15,7 +15,8 @@ const featuredProducts = [
     reviews: 124,
     inStock: true,
     badge: "Bestseller",
-    quantity: 50
+    quantity: 50,
+    unit: "liters"
   },
   {
     id: "2", 
@@ -27,7 +28,8 @@ const featuredProducts = [
     reviews: 89,
     inStock: true,
     badge: "Premium",
-    quantity: 30
+    quantity: 30,
+    unit: "kg"
   },
   {
     id: "3",
@@ -39,7 +41,8 @@ const featuredProducts = [
     rating: 4.7,
     reviews: 156,
     inStock: true,
-    quantity: 25
+    quantity: 25,
+    unit: "kg"
   },
   {
     id: "4",
@@ -51,7 +54,8 @@ const featuredProducts = [
     reviews: 73,
     inStock: true,
     badge: "Organic",
-    quantity: 40
+    quantity: 40,
+    unit: "liters"
   },
   {
     id: "5",
@@ -64,7 +68,8 @@ const featuredProducts = [
     reviews: 67,
     inStock: true,
     badge: "Premium",
-    quantity: 15
+    quantity: 15,
+    unit: "kg"
   },
   {
     id: "6",
@@ -76,7 +81,8 @@ const featuredProducts = [
     reviews: 112,
     inStock: true,
     badge: "Fresh",
-    quantity: 35
+    quantity: 35,
+    unit: "kg"
   }
 ];
 

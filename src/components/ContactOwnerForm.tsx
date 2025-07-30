@@ -29,17 +29,30 @@ const ContactOwnerForm = () => {
     setIsSubmitting(true);
 
     try {
-      // TODO: This requires email service integration (EmailJS, Formspree, or Supabase Edge Functions)
-      console.log('Contact form data:', formData);
-      
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+      // Call the Supabase edge function to send contact email
+      const response = await fetch(`https://rakqutfgccsolruybhyh.supabase.co/functions/v1/send-contact-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJha3F1dGZnY2Nzb2xydXliaHloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2ODY3ODksImV4cCI6MjA2OTI2Mjc4OX0.7rPiveymaPtqna151_gzxalGE6ggQpUmD0KLuFPB4EM`
+        },
+        body: JSON.stringify(formData)
       });
-      
-      // Reset form
-      setFormData({ name: "", email: "", subject: "", message: "" });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+        });
+        // Reset form
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        throw new Error(result.error || 'Failed to send message');
+      }
     } catch (error) {
+      console.error('Contact form error:', error);
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",

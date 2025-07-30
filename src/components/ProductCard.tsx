@@ -16,6 +16,7 @@ interface Product {
   inStock: boolean;
   badge?: string;
   quantity?: number;
+  unit?: string;
 }
 
 interface ProductCardProps {
@@ -137,7 +138,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {/* Quantity Available */}
           {product.quantity && (
             <div className="text-xs text-muted-foreground">
-              {product.quantity} units available
+              {product.quantity} {product.unit || 'units'} available
             </div>
           )}
 

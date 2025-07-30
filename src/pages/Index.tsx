@@ -22,6 +22,13 @@ const Index = () => {
     // Make search function globally available
     window.searchProducts = (query: string) => {
       setSearchQuery(query);
+      // Scroll to products section when searching
+      if (query) {
+        const productsSection = document.getElementById('products');
+        if (productsSection) {
+          productsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
     };
     
     return () => {

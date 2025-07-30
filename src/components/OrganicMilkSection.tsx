@@ -7,20 +7,20 @@ const OrganicMilkSection = () => {
     {
       id: "1",
       title: "Buffalo Milking Process - Traditional & Natural",
-      embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Replace with actual organic milk production video
+      embedUrl: "https://www.youtube.com/embed/WC_1GHxLdvA", // Dairy farm milking process video
       description: "See how we collect fresh milk from our healthy buffaloes using traditional methods"
     },
     {
       id: "2", 
       title: "Farm to Door - Organic Delivery Process",
-      embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Replace with actual delivery process video
+      embedUrl: "https://www.youtube.com/embed/3_lAb8m9MpI", // Farm to table delivery process
       description: "Follow our natural delivery process that maintains milk quality from farm to your doorstep"
     },
     {
       id: "3",
-      title: "Customer Testimonials - Pure & Fresh Experience", 
-      embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Replace with customer testimonial video
-      description: "Hear what our customers say about our organic milk quality and service"
+      title: "Modern Dairy Farm Operations", 
+      embedUrl: "https://www.youtube.com/embed/BWXzGiTLozg", // Modern dairy farming practices
+      description: "Learn about our modern dairy farming techniques that ensure quality and freshness"
     }
   ];
 
@@ -93,7 +93,12 @@ const OrganicMilkSection = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-12">
-          <Button size="lg" className="group" onClick={() => console.log('Order Organic Milk clicked')}>
+          <Button size="lg" className="group" onClick={() => {
+            const productsSection = document.getElementById('products');
+            if (productsSection) {
+              productsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}>
             Order Organic Milk Now
             <Play className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
