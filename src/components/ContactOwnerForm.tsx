@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { MessageSquare, Mail, Send, User } from "lucide-react";
+import { MessageSquare, Mail, Send, User, Home, Package, MapPin, Users } from "lucide-react";
 
 const ContactOwnerForm = () => {
   const { toast } = useToast();
@@ -63,9 +63,41 @@ const ContactOwnerForm = () => {
     }
   };
 
+  const quickLinks = [
+    { name: "About Us", icon: Users, target: "organic-milk" },
+    { name: "Products", icon: Package, target: "products" },
+    { name: "Home", icon: Home, target: "hero" },
+    { name: "Location", icon: MapPin, target: "contact-owner" }
+  ];
+
+  const scrollToSection = (target: string) => {
+    const element = document.getElementById(target);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="contact-owner" className="py-16 bg-background">
       <div className="container mx-auto px-4">
+        {/* Quick Links */}
+        <div className="text-center mb-12">
+          <h3 className="text-xl font-semibold mb-6">Quick Links</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            {quickLinks.map((link) => (
+              <Button
+                key={link.name}
+                variant="outline"
+                className="group"
+                onClick={() => scrollToSection(link.target)}
+              >
+                <link.icon className="h-4 w-4 mr-2" />
+                {link.name}
+              </Button>
+            ))}
+          </div>
+        </div>
+        
         <div className="max-w-2xl mx-auto">
           <Card className="shadow-elegant">
             <CardHeader className="text-center">

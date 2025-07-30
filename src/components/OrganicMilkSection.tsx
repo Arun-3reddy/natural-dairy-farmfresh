@@ -6,21 +6,21 @@ const OrganicMilkSection = () => {
   const videos = [
     {
       id: "1",
-      title: "Buffalo Milking Process - Traditional & Natural",
-      embedUrl: "https://www.youtube.com/embed/WC_1GHxLdvA", // Dairy farm milking process video
-      description: "See how we collect fresh milk from our healthy buffaloes using traditional methods"
+      title: "Modern Dairy Farm - Buffalo Milking",
+      embedUrl: "https://www.youtube.com/embed/KGJWA-KQCLE", // Dairy farm buffalo milking
+      description: "Experience our natural buffalo milking process with hygienic collection methods"
     },
     {
       id: "2", 
-      title: "Farm to Door - Organic Delivery Process",
-      embedUrl: "https://www.youtube.com/embed/3_lAb8m9MpI", // Farm to table delivery process
-      description: "Follow our natural delivery process that maintains milk quality from farm to your doorstep"
+      title: "Fresh Milk Collection Process",
+      embedUrl: "https://www.youtube.com/embed/Y6C9qEcUeOI", // Dairy farm milk collection
+      description: "Watch how we maintain the highest quality standards from cow to container"
     },
     {
       id: "3",
-      title: "Modern Dairy Farm Operations", 
-      embedUrl: "https://www.youtube.com/embed/BWXzGiTLozg", // Modern dairy farming practices
-      description: "Learn about our modern dairy farming techniques that ensure quality and freshness"
+      title: "Organic Dairy Farm Operations", 
+      embedUrl: "https://www.youtube.com/embed/dAJYy4qNNmg", // Organic dairy farming
+      description: "Discover our organic farming practices and commitment to natural dairy production"
     }
   ];
 

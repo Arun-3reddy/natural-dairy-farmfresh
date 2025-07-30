@@ -1,8 +1,13 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Truck, Shield, Leaf } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ArrowRight, Truck, Shield, Leaf, CreditCard } from "lucide-react";
 import heroDairyFarm from "@/assets/hero-dairy-farm.jpg";
+import PaymentGateway from "./PaymentGateway";
 
 const Hero = () => {
+  const [showPayment, setShowPayment] = useState(false);
+
   return (
     <section id="hero" className="relative min-h-[80vh] flex items-center bg-gradient-hero overflow-hidden">
       {/* Background Image */}
@@ -31,7 +36,7 @@ const Hero = () => {
             
             <p className="text-lg text-muted-foreground max-w-md leading-relaxed">
               Experience the authentic taste of farm-fresh dairy products, 
-              delivered to your doorstep within 12 hours of milking.
+              delivered to your doorstep within 1 hour of milking.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -53,7 +58,7 @@ const Hero = () => {
             <div className="flex items-center gap-6 pt-6">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Truck className="h-4 w-4 text-primary" />
-                <span>Free Delivery</span>
+                <span>1-Hour Fast Delivery</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Shield className="h-4 w-4 text-primary" />
@@ -75,20 +80,29 @@ const Hero = () => {
                 </div>
                 <h3 className="text-xl font-bold text-primary">Special Offer</h3>
                 <p className="text-sm text-muted-foreground">
-                  Fresh Milk Delivered Within 12 Hours!
+                  Fresh Milk Delivered Within 1 Hour!
                 </p>
                 <div className="bg-primary/10 rounded-lg p-4">
                   <p className="text-2xl font-bold text-primary">₹50</p>
                   <p className="text-sm text-muted-foreground">per liter</p>
                 </div>
-                <Button variant="cart" className="w-full" onClick={() => {
-                  const productsSection = document.getElementById('products');
-                  if (productsSection) {
-                    productsSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}>
-                  Order Now
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="cart" className="w-full group">
+                      Pay Now ₹50
+                      <CreditCard className="ml-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Complete Your Order</DialogTitle>
+                    </DialogHeader>
+                    <PaymentGateway 
+                      amount={50} 
+                      onPaymentSuccess={() => setShowPayment(false)} 
+                    />
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>

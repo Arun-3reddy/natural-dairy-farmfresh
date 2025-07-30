@@ -1,6 +1,9 @@
 import ProductCard from "./ProductCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import cowGheeImg from "@/assets/cow-ghee.jpg";
+import buffaloGheeImg from "@/assets/buffalo-ghee.jpg";
+import freshCurdImg from "@/assets/fresh-curd.jpg";
 
 // Mock product data
 const featuredProducts = [
@@ -22,7 +25,7 @@ const featuredProducts = [
     id: "2", 
     name: "Pure Cow Ghee",
     price: 300,
-    image: "https://images.unsplash.com/photo-1628773712345-77c14a1b0616?w=400&h=300&fit=crop&crop=center",
+    image: cowGheeImg,
     category: "Dairy Products",
     rating: 4.9,
     reviews: 89,
@@ -62,7 +65,7 @@ const featuredProducts = [
     name: "Buffalo Ghee",
     price: 450,
     originalPrice: 500,
-    image: "https://images.unsplash.com/photo-1465379944081-7f47de8d74ac?w=400&h=300&fit=crop&crop=center",
+    image: buffaloGheeImg,
     category: "Dairy Products",
     rating: 4.9,
     reviews: 67,
@@ -75,7 +78,7 @@ const featuredProducts = [
     id: "6",
     name: "Curd",
     price: 40,
-    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?w=400&h=300&fit=crop&crop=center",
+    image: freshCurdImg,
     category: "Dairy Products",
     rating: 4.7,
     reviews: 112,
