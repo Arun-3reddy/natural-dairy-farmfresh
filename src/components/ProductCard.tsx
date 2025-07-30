@@ -15,6 +15,7 @@ interface Product {
   reviews: number;
   inStock: boolean;
   badge?: string;
+  quantity?: number;
 }
 
 interface ProductCardProps {
@@ -132,6 +133,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
               </span>
             )}
           </div>
+
+          {/* Quantity Available */}
+          {product.quantity && (
+            <div className="text-xs text-muted-foreground">
+              {product.quantity} units available
+            </div>
+          )}
 
           {/* Actions */}
           <div className="flex gap-2 pt-2">
