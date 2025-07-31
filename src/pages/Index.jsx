@@ -9,18 +9,13 @@ import Footer from "@/components/Footer";
 import { AppProvider } from "@/contexts/AppContext";
 import { Toaster } from "@/components/ui/toaster";
 
-declare global {
-  interface Window {
-    searchProducts?: (query: string) => void;
-  }
-}
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     // Make search function globally available
-    window.searchProducts = (query: string) => {
+    window.searchProducts = (query) => {
       setSearchQuery(query);
       // Scroll to products section when searching
       if (query) {
