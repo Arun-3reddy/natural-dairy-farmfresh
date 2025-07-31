@@ -10,14 +10,14 @@ const Header = () => {
   const { cart, wishlist } = useApp();
   const { user, signOut } = useAuth();
 
-  const handleSearch = (query: string) => {
+  const handleSearch = (query) => {
     // Pass search query to parent component
     if (window.searchProducts) {
       window.searchProducts(query);
     }
   };
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
