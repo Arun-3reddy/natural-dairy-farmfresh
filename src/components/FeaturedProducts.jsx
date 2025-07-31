@@ -89,11 +89,8 @@ const featuredProducts = [
   }
 ];
 
-interface FeaturedProductsProps {
-  searchQuery?: string;
-}
 
-const FeaturedProducts = ({ searchQuery = "" }: FeaturedProductsProps) => {
+const FeaturedProducts = ({ searchQuery = "" }) => {
   // Filter products based on search query
   const filteredProducts = featuredProducts.filter(product =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
