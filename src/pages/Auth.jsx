@@ -30,14 +30,14 @@ const Auth = () => {
     }
   }, [user]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
@@ -78,7 +78,7 @@ const Auth = () => {
           });
         }
       }
-    } catch (error: any) {
+    } catch (error) {
       toast({
         title: "Error",
         description: error.message || "An unexpected error occurred",
@@ -89,13 +89,14 @@ const Auth = () => {
     }
   };
 
-  const handleForgotPassword = async (e: React.FormEvent) => {
+  const handleForgotPassword = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     setLoading(true);
 
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
-        redirectTo: `${window.location.origin}/auth`
+        redirectTo: `${window.location.origin}/auth?type=recovery`
       });
 
       if (error) {
@@ -112,7 +113,7 @@ const Auth = () => {
         setShowForgotPassword(false);
         setResetEmail('');
       }
-    } catch (error: any) {
+    } catch (error) {
       toast({
         title: "Error", 
         description: error.message || "Failed to send password reset email",
