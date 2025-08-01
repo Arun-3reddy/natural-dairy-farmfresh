@@ -1,51 +1,47 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import FeaturedProducts from "@/components/FeaturedProducts";
-import OrganicMilkSection from "@/components/OrganicMilkSection";
-import CustomerSignupForm from "@/components/CustomerSignupForm";
-import ContactOwnerForm from "@/components/ContactOwnerForm";
+import About from "@/components/About";
+import Education from "@/components/Education";
+import Skills from "@/components/Skills";
+import Internships from "@/components/Internships";
+import Projects from "@/components/Projects";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import { AppProvider } from "@/contexts/AppContext";
 import { Toaster } from "@/components/ui/toaster";
 
-
 const Index = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-
   useEffect(() => {
-    // Make search function globally available
-    window.searchProducts = (query) => {
-      setSearchQuery(query);
-      // Scroll to products section when searching
-      if (query) {
-        const productsSection = document.getElementById('products');
-        if (productsSection) {
-          productsSection.scrollIntoView({ behavior: 'smooth' });
+    // Smooth scrolling for all anchor links
+    const handleSmoothScroll = (e) => {
+      if (e.target.getAttribute('href')?.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(e.target.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
         }
       }
     };
-    
-    return () => {
-      delete window.searchProducts;
-    };
+
+    document.addEventListener('click', handleSmoothScroll);
+    return () => document.removeEventListener('click', handleSmoothScroll);
   }, []);
 
   return (
-    <AppProvider>
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main>
-          <Hero />
-          <FeaturedProducts searchQuery={searchQuery} />
-          <OrganicMilkSection />
-          <CustomerSignupForm />
-          <ContactOwnerForm />
-        </main>
-        <Footer />
-        <Toaster />
-      </div>
-    </AppProvider>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main>
+        <Hero />
+        <About />
+        <Education />
+        <Skills />
+        <Internships />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
+      <Toaster />
+    </div>
   );
 };
 

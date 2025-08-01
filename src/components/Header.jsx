@@ -1,104 +1,110 @@
-import { ShoppingCart, Heart, User, LogOut } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { useApp } from "@/contexts/AppContext";
-import { useAuth } from "@/contexts/AuthContext";
-import CartDrawer from "./CartDrawer";
-import SearchBar from "./SearchBar";
+import { Menu, X } from "lucide-react";
 
 const Header = () => {
-  const { cart, wishlist } = useApp();
-  const { user, signOut } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
-  const handleSearch = (query) => {
-    // Pass search query to parent component
-    if (window.searchProducts) {
-      window.searchProducts(query);
-    }
-  };
+  const navItems = [
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Education', href: '#education' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Internships', href: '#internships' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Contact', href: '#contact' }
+  ];
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navItems.map(item => item.href.substring(1));
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (href) => {
+    const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsMenuOpen(false);
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-sm border-b border-border/40 shadow-soft">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b">
+      <nav className="container mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2 hover-scale cursor-pointer">
-            <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">N</span>
-            </div>
-            <div>
-              <h1 className="font-bold text-xl text-primary">Natural Dairy</h1>
-              <p className="text-xs text-muted-foreground">Naturally Pure, Wholesomely Yours</p>
-            </div>
+          <div className="text-2xl font-bold text-primary">
+            Portfolio
           </div>
 
-          {/* Search Bar */}
-          <SearchBar onSearch={handleSearch} />
-
-          {/* Navigation Icons */}
-          <div className="flex items-center space-x-4">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="relative hover-scale" 
-              onClick={() => console.log('Wishlist clicked')}
-            >
-              <Heart className={`h-5 w-5 ${wishlist.wishlistCount > 0 ? 'text-red-500 fill-current' : ''}`} />
-              {wishlist.wishlistCount > 0 && (
-                <Badge 
-                  variant="secondary" 
-                  className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-red-500 text-white animate-scale-in"
-                >
-                  {wishlist.wishlistCount}
-                </Badge>
-              )}
-            </Button>
-            
-            <CartDrawer
-              cartItems={cart.cartItems}
-              cartCount={cart.getCartCount()}
-              cartTotal={cart.getCartTotal()}
-              isOpen={cart.isOpen}
-              setIsOpen={cart.setIsOpen}
-              updateQuantity={cart.updateQuantity}
-              removeFromCart={cart.removeFromCart}
-            />
-            
-            {/* Auth buttons */}
-            {user ? (
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">Welcome, {user.user_metadata?.full_name || user.email}</span>
-                <Button variant="outline" size="sm" className="hover-scale" onClick={signOut}>
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Sign Out
-                </Button>
-              </div>
-            ) : (
-              <Button variant="outline" size="sm" className="hover-scale" onClick={() => window.location.href = '/auth'}>
-                <User className="h-4 w-4 mr-2" />
-                Sign In
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <Button
+                key={item.name}
+                variant="ghost"
+                className={`hover:text-primary transition-colors ${
+                  activeSection === item.href.substring(1) 
+                    ? 'text-primary font-medium' 
+                    : 'text-muted-foreground'
+                }`}
+                onClick={() => scrollToSection(item.href)}
+              >
+                {item.name}
               </Button>
-            )}
+            ))}
           </div>
+
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </Button>
         </div>
 
-        {/* Navigation Menu */}
-        <nav className="border-t border-border/40 py-3">
-          <div className="flex items-center justify-center space-x-8">
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('hero')}>Home</Button>
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('products')}>Dairy Products</Button>
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('organic-milk')}>About Us</Button>
-            <Button variant="ghost" className="text-sm story-link" onClick={() => scrollToSection('footer')}>Contact</Button>
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden mt-4 py-4 border-t animate-fade-in">
+            <div className="flex flex-col space-y-2">
+              {navItems.map((item) => (
+                <Button
+                  key={item.name}
+                  variant="ghost"
+                  className={`justify-start hover:text-primary transition-colors ${
+                    activeSection === item.href.substring(1) 
+                      ? 'text-primary font-medium bg-primary/10' 
+                      : 'text-muted-foreground'
+                  }`}
+                  onClick={() => scrollToSection(item.href)}
+                >
+                  {item.name}
+                </Button>
+              ))}
+            </div>
           </div>
-        </nav>
-      </div>
+        )}
+      </nav>
     </header>
   );
 };
