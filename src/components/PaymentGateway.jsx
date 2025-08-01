@@ -4,12 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { CreditCard, Shield, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-interface PaymentGatewayProps {
-  amount: number;
-  onPaymentSuccess: () => void;
-}
-
-const PaymentGateway = ({ amount, onPaymentSuccess }: PaymentGatewayProps) => {
+const PaymentGateway = ({ amount, onPaymentSuccess }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
 

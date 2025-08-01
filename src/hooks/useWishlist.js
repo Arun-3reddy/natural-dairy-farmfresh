@@ -1,16 +1,9 @@
 import { useState, useCallback } from 'react';
 
-export interface WishlistItem {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-}
-
 export const useWishlist = () => {
-  const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
+  const [wishlistItems, setWishlistItems] = useState([]);
 
-  const addToWishlist = useCallback((product: any) => {
+  const addToWishlist = useCallback((product) => {
     setWishlistItems(prev => {
       const exists = prev.find(item => item.id === product.id);
       if (exists) return prev;
@@ -18,15 +11,15 @@ export const useWishlist = () => {
     });
   }, []);
 
-  const removeFromWishlist = useCallback((id: string) => {
+  const removeFromWishlist = useCallback((id) => {
     setWishlistItems(prev => prev.filter(item => item.id !== id));
   }, []);
 
-  const isInWishlist = useCallback((id: string) => {
+  const isInWishlist = useCallback((id) => {
     return wishlistItems.some(item => item.id === id);
   }, [wishlistItems]);
 
-  const toggleWishlist = useCallback((product: any) => {
+  const toggleWishlist = useCallback((product) => {
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id);
     } else {

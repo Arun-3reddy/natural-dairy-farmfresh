@@ -4,26 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { useApp } from "@/contexts/AppContext";
 
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  category: string;
-  rating: number;
-  reviews: number;
-  inStock: boolean;
-  badge?: string;
-  quantity?: number;
-  unit?: string;
-}
-
-interface ProductCardProps {
-  product: Product;
-}
-
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product }) => {
   const { cart, wishlist, toast } = useApp();
   
   const discount = product.originalPrice 

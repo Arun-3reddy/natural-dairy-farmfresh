@@ -3,15 +3,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, X } from "lucide-react";
 
-interface SearchBarProps {
-  onSearch: (query: string) => void;
-  placeholder?: string;
-}
-
-const SearchBar = ({ onSearch, placeholder = "Search for dairy products..." }: SearchBarProps) => {
+const SearchBar = ({ onSearch, placeholder = "Search for dairy products..." }) => {
   const [query, setQuery] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
