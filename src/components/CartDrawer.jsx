@@ -2,17 +2,6 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingCart, Plus, Minus, Trash2 } from "lucide-react";
-import { CartItem } from "@/hooks/useCart";
-
-interface CartDrawerProps {
-  cartItems: CartItem[];
-  cartCount: number;
-  cartTotal: number;
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-  updateQuantity: (id: string, quantity: number) => void;
-  removeFromCart: (id: string) => void;
-}
 
 const CartDrawer = ({ 
   cartItems, 
@@ -22,7 +11,7 @@ const CartDrawer = ({
   setIsOpen, 
   updateQuantity, 
   removeFromCart 
-}: CartDrawerProps) => {
+}) => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
