@@ -1,18 +1,10 @@
 import { useState, useCallback } from 'react';
 
-export interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  quantity: number;
-}
-
 export const useCart = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const addToCart = useCallback((product: any) => {
+  const addToCart = useCallback((product) => {
     setCartItems(prev => {
       const existingItem = prev.find(item => item.id === product.id);
       if (existingItem) {
@@ -26,11 +18,11 @@ export const useCart = () => {
     });
   }, []);
 
-  const removeFromCart = useCallback((id: string) => {
+  const removeFromCart = useCallback((id) => {
     setCartItems(prev => prev.filter(item => item.id !== id));
   }, []);
 
-  const updateQuantity = useCallback((id: string, quantity: number) => {
+  const updateQuantity = useCallback((id, quantity) => {
     if (quantity <= 0) {
       removeFromCart(id);
       return;
