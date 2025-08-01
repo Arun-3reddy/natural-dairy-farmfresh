@@ -20,14 +20,14 @@ const CustomerSignupForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!user) {
@@ -61,7 +61,7 @@ const CustomerSignupForm = () => {
       
       // Reset form
       setFormData({ name: "", email: "", phone: "", address: "" });
-    } catch (error: any) {
+    } catch (error) {
       toast({
         title: "Error",
         description: error.message || "Failed to update profile. Please try again.",
