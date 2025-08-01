@@ -1,15 +1,9 @@
-import { createContext, useContext, ReactNode } from 'react';
+import { createContext, useContext } from 'react';
 import { useCart } from '@/hooks/useCart';
 import { useWishlist } from '@/hooks/useWishlist';
 import { useToast } from '@/hooks/use-toast';
 
-interface AppContextType {
-  cart: ReturnType<typeof useCart>;
-  wishlist: ReturnType<typeof useWishlist>;
-  toast: ReturnType<typeof useToast>;
-}
-
-const AppContext = createContext<AppContextType | undefined>(undefined);
+const AppContext = createContext(undefined);
 
 export const useApp = () => {
   const context = useContext(AppContext);
@@ -19,11 +13,7 @@ export const useApp = () => {
   return context;
 };
 
-interface AppProviderProps {
-  children: ReactNode;
-}
-
-export const AppProvider = ({ children }: AppProviderProps) => {
+export const AppProvider = ({ children }) => {
   const cart = useCart();
   const wishlist = useWishlist();
   const toast = useToast();
